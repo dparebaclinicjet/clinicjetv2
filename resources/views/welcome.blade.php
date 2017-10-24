@@ -19,6 +19,7 @@
     <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
     <!-- <link href="https://fonts.googleapis.com/css?family=Niconne" rel="stylesheet"> -->
     <link href="https://fonts.googleapis.com/css?family=Fondamento" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
 
     <!-- Plugin CSS -->
     <link rel="stylesheet" href="{{asset('device-mockups/device-mockups.css')}}">
@@ -29,7 +30,8 @@
 </head>
 
 <body id="page-top">
-
+    <div class="container">
+    </div>
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
         <div class="container">
@@ -49,12 +51,21 @@
                     <li class="nav-item">
                         <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="#register"><b><i>Register</i></b></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="#login"><b><i>Login</i></b></a>
-                    </li>
+                    @if(Route::has('login'))
+                        @auth
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger btn btn-info" href="/home">Return to Main Page</a>
+                        </li>
+                    @else
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger btn btn-info" href="{{ route('register') }}">Register</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger btn btn-danger" href="{{ route('login') }}">Login</a>
+                        </li>
+                        @endauth 
+                    @endif
+
                 </ul>
             </div>
         </div>
@@ -65,7 +76,10 @@
             <div class="row h-100">
                 <div class="col-lg-7 my-auto">
                     <div class="header-content mx-auto">
-                        <h1 class="mb-5" id="landingpage-quote">ClinicJet is an amazing, easy-to-use cloud based electronic health record system for doctors and patients!!</h1>
+                        <h1 class="mb-5" id="landingpage-quote">The #1 cloud-based electronic health record platform for doctors and patients
+                        </h1>
+                        <h3 class="mb-5">Join health care professionals across India on the most connected network in healthcare. <b>Sign Up Now!!</b>
+                        </h3>
                         <a href="#download" class="btn btn-outline btn-xl js-scroll-trigger">Start Now for Free!</a>
                     </div>
                 </div>
@@ -78,7 +92,7 @@
                                 <div class="screen">
                                     <!-- Demo image for screen mockup, you can put an image here, some HTML, an animation, video, or anything else! -->
                                     <!-- <img src="img/demo-screen-1.jpg" class="img-fluid" alt="">  -->
-                                    <img src="img/Clinicjet.jpg" class="img-fluid" alt="">
+                                    {{--  <img src="img/Clinicjet.jpg" class="img-fluid" alt="">  --}}
                                 </div>
                                 <div class="button">
                                     <!-- You can hook the "home button" to some JavaScript events or just remove it -->
@@ -94,13 +108,23 @@
     <section class="download bg-primary text-center" id="download">
         <div class="container">
             <div class="row">
+
+            </div>
+            <div class="row">
                 <div class="col-md-8 mx-auto">
                     <h2 class="section-heading">Discover what all the buzz is about!</h2>
                     <p>Access your patients records. Anytime! Anyplace! </p>
+                    @if(Route::has('login')) @auth
                     <div class="badges">
-                        <a href="#" class="btn btn-outline-danger regbtn">Register</a>
-                        <a href="#" class="btn btn-outline-secondary regbtn">Login Now!!</a>
+                        <a href="/home" class="btn btn-outline-danger regbtn">Return to Main Page</a>
                     </div>
+                    @else
+                    <div class="badges">
+                        <a href="{{ route('register') }}" class="btn btn-outline-danger regbtn">Register</a>
+                        <a href="{{ route('login') }}" class="btn btn-outline-secondary regbtn">Login Now!!</a>
+                    </div>
+                    @endauth @endif
+
                 </div>
             </div>
         </div>
@@ -174,7 +198,7 @@
         <div class="cta-content">
             <div class="container">
                 <h2>Stop waiting.<br>Start e-prescribing.</h2>
-                <a href="#contact" class="btn btn-outline btn-xl js-scroll-trigger">Let's Get Started!</a>
+                <a href="#download" class="btn btn-outline btn-xl js-scroll-trigger">Let's Get Started!</a>
             </div>
         </div>
         <div class="overlay"></div>
@@ -202,7 +226,7 @@
                 </li>
             </ul>
             <hr>
-            <h1><i class="fa fa-phone-square" aria-hidden="true"></i> Talk to us: +91 7678088360</h1>
+            <h1><i class="fa fa-phone-square" aria-hidden="true"></i> Talk to us: 889 889 0909</h1>
         </div>
     </section>
 
