@@ -1,69 +1,82 @@
-@extends('layouts.app')
-
+@extends('layouts.authmaster')
+@section('pagetitle')
+    Login Page
+@endsection
+@section('metacontent')
+    Login Page of ClinicJet
+@endsection
+@section('customcss')
+    <link rel="stylesheet" href="{{asset('css/logincustom.css')}}">
+@endsection
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Login</div>
+    <div class="se-pre-con"></div>
+        
+        <div class="user-login-5">
+            <div class="row bs-reset">
+                <div class="col-md-6 bs-reset mt-login-5-bsfix">
+                    <div class="login-bg" style="background-image:url(../assets/pages/img/login/bg1.jpg)">
+                        <img class="login-logo" src="../assets/pages/img/login/logo.png" alt="ClinicJet" /> </div>
+                </div>
+                <div class="col-md-6 login-container bs-reset mt-login-5-bsfix">
+                    <div class="login-content">
+                        <h1>Login to ClinicJet!!</h1>
+                        <p> Discover how we can help deliver patient-centered care. </p>
+                        
+                        <form action="{{ route('login') }}" class="login-form" method="POST">
+                            {{csrf_field()}}
+                            {{--  <div class="alert alert-danger display-hide">
+                                <button class="close" data-close="alert"></button>
+                                <span>Enter any username and password. </span>
+                            </div>  --}}
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+                            
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <input class="form-control form-control-solid placeholder-no-fix form-group " type="text" autocomplete="off" placeholder="Registered e-mail id" name="email" id="email" value="{{ old('email') }}"  required/>
+                                </div>
 
-                <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('login') }}">
-                        {{ csrf_field() }}
-
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
-
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
-                                    </label>
+                                <div class="col-xs-6">
+                                    <input class="form-control form-control-solid placeholder-no-fix form-group" type="password" autocomplete="off" placeholder="Password" name="password" id="password" required/>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-8 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Login
-                                </button>
-
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    Forgot Your Password?
-                                </a>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="rem-password">
+                                        <label class="rememberme mt-checkbox mt-checkbox-outline">
+                                            <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }} /> Remember me
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-sm-8 text-right">
+                                    <div class="forgot-password">
+                                        <a href="{{route('password.request')}}" >Forgot Password?</a>
+                                    </div>
+                                    <button class="btn green" type="submit">Sign In</button>
+                                </div>
                             </div>
-                        </div>
-                    </form>
+                        </form>
+                        
+                    </div>
+
+                    {{--  footer  --}}
+                    @include('partials._authfooter') 
+
                 </div>
             </div>
         </div>
-    </div>
-</div>
+        
+@endsection
+
+@section('customjs')
+    <script src="{{asset('js/logincustom.js')}}"></script>
 @endsection

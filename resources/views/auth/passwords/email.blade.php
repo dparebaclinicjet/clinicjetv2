@@ -1,47 +1,72 @@
-@extends('layouts.app')
-
+@extends('layouts.authmaster')
+@section('pagetitle')
+    Forgot Password
+@endsection
+@section('metacontent')
+    Forgot Password Page of ClinicJet
+@endsection
+@section('customcss')
+    <link rel="stylesheet" href="{{asset('css/logincustom.css')}}">
+@endsection
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Reset Password</div>
+    <div class="se-pre-con"></div>
+        
 
-                <div class="panel-body">
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+        <div class="user-login-5">
+            <div class="row bs-reset">
+                <div class="col-md-6 bs-reset mt-login-5-bsfix">
+                    <div class="login-bg" style="background-image:url(../assets/pages/img/login/bg1.jpg)">
+                        <img class="login-logo" src="../assets/pages/img/login/logo.png" alt="ClinicJet" /> </div>
+                </div>
 
-                    <form class="form-horizontal" method="POST" action="{{ route('password.email') }}">
-                        {{ csrf_field() }}
-
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
-
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
+              
+                <div class="col-md-6 login-container bs-reset mt-login-5-bsfix">
+                       
+                    <div class="login-content">
+                        <h1>Forgot Password!!</h1>
+                        <p> Don't Worry!! We've got this covered. </p> 
+                       
+                        <!-- BEGIN FORGOT PASSWORD FORM -->
+                        <form class="forget-form" action="{{ route('password.email') }}" method="POST">
+                            {{csrf_field()}}
+                            
+                           
+                            <h3 class="font-green">Forgot Password ?</h3>
+                            <p> Enter your e-mail address below to reset your password. </p>
+                             @if ($errors->any())
+                                <br><br>
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+                            @if (session('status'))
+                                <br><br>
+                                <div class="alert alert-success">
+                                    {{ session('status') }}
+                                </div>
+                            @endif
+                            <div class="form-group">
+                                <input class="form-control placeholder-no-fix form-group" type="text" autocomplete="off" placeholder="Email" name="email" id="email" value="{{ old('email') }}" /> </div>
+                            <div class="form-actions">
+                                <a type="button" id="back-btn" href="/login" class="btn green btn-outline">Back</a>
+                                <button type="submit" class="btn btn-success uppercase pull-right">Submit</button>
                             </div>
-                        </div>
+                        </form>
+                        <!-- END FORGOT PASSWORD FORM -->
+                    </div>
 
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Send Password Reset Link
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                    {{--  footer  --}}
+                    @include('partials._authfooter') 
+
                 </div>
             </div>
         </div>
-    </div>
-</div>
+        
+@endsection
+@section('customjs')
+    <script src="{{asset('js/logincustom.js')}}"></script>
 @endsection

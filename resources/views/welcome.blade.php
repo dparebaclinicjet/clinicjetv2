@@ -26,10 +26,14 @@
 
     <!-- Custom styles for this template -->
     <link href="{{asset('css/new-age.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('css/customloader.css')}}">
 
 </head>
 
 <body id="page-top">
+
+    <div class="se-pre-con"></div>
+
     <div class="container">
     </div>
     <!-- Navigation -->
@@ -257,7 +261,7 @@
 
     <!-- Custom scripts for this template -->
     <script src="{{asset('js/new-age.min.js')}}"></script>
-
+    <script src="{{asset('js/customloader.js')}}"></script>
 </body>
 
 </html>
